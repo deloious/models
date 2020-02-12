@@ -15,6 +15,7 @@
   pycocotools  
   six  
   terminaltables  
+  
    
    
 ## 解决方案
@@ -30,7 +31,7 @@
  ### 算法流程
  我们这次图像检测使用的是基于pytorch的mmdetection目标检测框架，使用的网络模型是基于Backbones为ResNet50的Cascade_rcnn_dconv_c3-c5_r50_fpn模型。  
  首先，我们针对数据集的特点，删除了数据集注释文件annotations.json文件中只有背景的图片（category_id = 0）,只训练了含有目标的图片；  
- 其次，针对比赛要求的评价指标和IoU阈值，我们对模型的配置文件进行了修改，修改的地方如下：  
+ 其次，针对比赛要求的评价指标和IoU阈值，为了提高目标检测的精确度，我们对模型的配置文件进行了修改和设置，设置的地方如下：  
  
  **1、** epoch数，经过初赛阶段一的多次训练和测试，发现在epoch=18的时候精确性比较高；  
   
@@ -42,9 +43,9 @@
  
  ## 代码运行说明
    ### 编译
-   这个代码是基于mmdetection框架，所以在依赖安装完成之后，需要执行编译，首先通过命令python setup.py develop 执行/code/目录下的setup.py文件，使程序进行编译。
+   这个代码是基于mmdetection框架，代码所需的依赖位于/code/目录下的requirements.txt文件中，mmdet文件夹中是运行代码所需要的工具包，在依赖安装完成之后，需要执行编译，首先通过命令python setup.py develop 执行/code/目录下的setup.py文件，使程序进行编译。
  
   ### 程序入口
-   所提交的代码中project文件夹下面/code/目录下的main.py为主程序，执行python3 main.py即可产生预测结果，将在prediction_result目录下生成预测结果文件predictions.json，预测代码main.py根据/code/目录下的MyConfig.py文件和/usr_data/目录下的model.pth模型文件的内容共同产生预测结果predjictions.json。
+   所提交的代码project文件夹下面/code/目录下的main.py为主程序，执行python3 main.py即可产生预测结果，将在prediction_result目录下生成预测结果文件predictions.json，预测代码main.py根据/code/目录下的MyConfig.py文件和/usr_data/目录下的model.pth模型文件的内容共同产生预测结果predjictions.json。
  
  
