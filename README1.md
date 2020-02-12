@@ -1,38 +1,18 @@
  ## 解决方案
  ### 数据集特点
  竞赛初赛阶段一的数据集图像尺寸最小为658x492，最大尺寸为4096x3000,所以，数据集的变化范围比较大；
- 其次，数据集中包含只有的背景图片，因此在训练的过程中需要将只含有背景的图片剔除到训练之外，使得模型的训练精度更高
+ 其次，数据集中包含了只有的背景图片；
+ 针对数据集尺寸不相同的情况，我们在训练的过程中进行多尺度训练，经过实验证明，对图像进行1333x1000和1500x1200的尺寸训练得到的模型训练精度更高。
+ 针对数据集中包含了只有背景的图片，我们在训练开始的时候将这些只含有背景的图片剔除在训练集之外，只训练含有物体的图像。
+
+ ### 算法流程
+ 我们这次图像检测使用的是基于pytorch的mmdetection目标检测框架，使用的网络模型是基于Backbones为ResNet50的Cascade_rcnn_dconv_c3-c5_r50_fpn模型。
+ 首先，我们针对数据集的特点，删除了数据集注释文件annotations.json文件中只有背景的图片（category_id = 0）,只训练了含有目标的图片；
+ 其次，针对比赛要求的评价指标和IoU阈值，我们对模型的配置文件进行了修改，修改的地方如下：
+ 1、修改了学习率和epoch数，经过初赛阶段一的多次训练和测试，我们找到了一个效果比较好的学习率为0.0025，imgs_per_gpu=2(batchsize设置成2)，worker_per_gpu =2，epoch数为18；
+ 2、修改了模型配置文件中model training and testing settings部分，根据比赛提供的IoU阈值，我们将mmdetection下configs文件中cascade_rcnn_dconv_c3-c5_r50_fpn_1x.py文件下的rcnn的三个stage的阈值进行了修改，stage=1处的pos_iou_thr、neg_iou_thr、min_pos_iou由原来的0.5改成了0.4，stage=2处的pos_iou_thr、neg_iou_thr、min_pos_iou由原来的0.6改成了0.5，stage=3处的pos_iou_thr、neg_iou_thr、min_pos_iou由原来的0.7改成了0.6（请看code目录下的MyConfig.py文件）；
+ 3、在此基础上，我们修改了配置文件中model training and testing settings部分下的test_cfg下rcnn的score_thr，由原来的0.05改成了0.003；
+ 4、其次，修改了配置文件中model training and testing settings部分下的rpn字典的pos_iou_thr由原来的0.7改成了0.6，neg_iou_thr和min_pos_iou由原来的0.3改成0.2（请看code目录下的MyConfig.py文件）；
  
- ## 模型转化指导
-可以参考以下指导书将开源网络模型转化为华为NPU芯片支持的Davici模型。
-
-[离线模型转化指导](https://ascend.github.io/ascenddk-private/doc/cn/mindstudio_opg/%E6%96%B0%E5%A2%9E%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9E%8B%E7%BB%84%E4%BB%B6.html)
-
-## 模型列表<a name="section62083614491"></a>
-
-<a name="table224171614494"></a>
-<table><thead align="left"><tr id="row5243191618495"><th class="cellrowborder" valign="top" width="30%" id="mcps1.1.6.1.1"><p id="p1524371634910"><a name="p1524371634910"></a><a name="p1524371634910"></a>Model路径</p>
-</th>
-<th class="cellrowborder" valign="top" width="30%" id="mcps1.1.6.1.2"><p id="p82431216154918"><a name="p82431216154918"></a><a name="p82431216154918"></a>模型描述</p>
-</th>
-</th>
-
-</tr>
-</thead>
-<tbody><tr id="row12243161634918"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.1.6.1.1 "><p id="p324351654911">computer_vision/object_detect/</p>
-</td>
-<td class="cellrowborder" valign="top" width="30%" headers="mcps1.1.6.1.2 "><p id="p15243916204916">此路径中模型为目标检测网络模型</p>
-</td>
-</tr>
-<tr id="row12243161634918"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.1.6.1.1 "><p id="p324351654911">computer_vision/classification/</p>
-</td>
-<td class="cellrowborder" valign="top" width="30%" headers="mcps1.1.6.1.2 "><p id="p15243916204916">此路径中模型为分类网络模型</p>
-</td>
-</tr>
-</tbody>
-</table>
-
-## 说明<a name="section5806355565"></a>
-
-模型提交请按照[README_MODEL_TEMPLATE.md](README_MODEL_TEMPLATE.md)要求提交。
-此仓中的模型是从互联网获取的开源网络模型，未经过华为优化，相关精度、性能取决于源网络。如您不满足你的使用要求，可以联系华为获取商用解决方案。
+ 
+ 
