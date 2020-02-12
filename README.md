@@ -33,7 +33,7 @@
  首先，我们针对数据集的特点，删除了数据集注释文件annotations.json文件中只有背景的图片（category_id = 0）,只训练了含有目标的图片；  
  其次，针对比赛要求的评价指标和IoU阈值，为了提高目标检测的精确度，我们对模型的配置文件进行了修改和设置，设置的地方如下：  
  
- **1、** epoch数，经过初赛阶段一的多次训练和测试，发现在epoch=18的时候精确性比较高；  
+ **1、** epoch数，经过初赛阶段一的多次训练和测试，发现在epoch=18的时候训练比较充分，准确性比较高；  
   
  **2、** 经过实验我们发现/code/目录下的MyConfig.py 文件中model training and testing settings部分的阈值对实验结果产生了影响，根据比赛提供的IoU阈值，我们将网络配置文件MyConfig.py的rcnn的三个stage的阈值进行了设置，stage=1处的pos_iou_thr、neg_iou_thr、min_pos_iou分别为0.4，stage=2处的pos_iou_thr、neg_iou_thr、min_pos_iou设置成0.5，stage=3处的pos_iou_thr、neg_iou_thr、min_pos_iou设置成0.6（请看code目录下的MyConfig.py文件），这样的设置提高了检测框的准确性；  
  
