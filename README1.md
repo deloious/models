@@ -32,8 +32,10 @@
  其次，针对比赛要求的评价指标和IoU阈值，我们对模型的配置文件进行了修改，修改的地方如下：  
  **1、** epoch数，经过初赛阶段一的多次训练和测试，发现在epoch=18的时候精确性比较高；  
   
- **2、** 修改了模型配置文件中model training and testing settings部分，根据比赛提供的IoU阈值，我们将mmdetection下configs文件中cascade_rcnn_dconv_c3-c5_r50_fpn_1x.py文件下的rcnn的三个stage的阈值进行了修改，stage=1处的pos_iou_thr、neg_iou_thr、min_pos_iou由原来的0.5改成了0.4，stage=2处的pos_iou_thr、neg_iou_thr、min_pos_iou由原来的0.6改成了0.5，stage=3处的pos_iou_thr、neg_iou_thr、min_pos_iou由原来的0.7改成了0.6（请看code目录下的MyConfig.py文件）；  
- **3、** 在此基础上，我们修改了配置文件中model training and testing settings部分下的test_cfg下rcnn的score_thr，由原来的0.05改成了0.003；  
+ **2、** 修改了模型配置文件中model training and testing settings部分，根据比赛提供的IoU阈值，我们将mmdetection下configs文件中cascade_rcnn_dconv_c3-c5_r50_fpn_1x.py文件下的rcnn的三个stage的阈值进行了修改，stage=1处的pos_iou_thr、neg_iou_thr、min_pos_iou由原来的0.5改成了0.4，stage=2处的pos_iou_thr、neg_iou_thr、min_pos_iou由原来的0.6改成了0.5，stage=3处的pos_iou_thr、neg_iou_thr、min_pos_iou由原来的0.7改成了0.6（请看code目录下的MyConfig.py文件）； 
+ 
+ **3、** 在此基础上，我们修改了配置文件中model training and testing settings部分下的test_cfg下rcnn的score_thr，由原来的0.05改成了0.003； 
+ 
  **4、** 其次，修改了配置文件中model training and testing settings部分下的rpn字典的pos_iou_thr由原来的0.7改成了0.6，neg_iou_thr和min_pos_iou由原来的0.3 改成0.2（请看code目录下的MyConfig.py文件）； 
  
  ## 代码运行说明
