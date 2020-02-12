@@ -1,7 +1,7 @@
 ## 使用的环境以及依赖
   ubuntu16.04   
   python3.6或python3.7  
-  pytorch 1.3 torchvision 0.4    
+  pytorch 1.3  torchvision 0.4    
   cuda 10.1  
   mmdetection框架  
   gcc >= 4.9  
