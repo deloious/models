@@ -6,6 +6,7 @@
     cuda 10.1  
     gcc >= 4.9  
     nccl 2  
+    mmcv  
    
 
 ## 程序入口
