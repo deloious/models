@@ -18,7 +18,7 @@
    
 
 ## 程序入口
-   所提交的代码中project文件夹下面code目录下的main.py为主程序，执行python3 main.py即可产生预测结果，产生的预测结果将位于prediction_result目录下的prediction.json文件。
+    所提交的代码中project文件夹下面/code/目录下的main.py为主程序，执行python3 main.py即可产生预测结果，将在prediction_result目录下生成预测结果文件prediction.json，预测代码main.py根据/code/目录下的MyConfig.py文件和/usr_data/目录下的model.pth模型文件的内容共同产生预测结果。
    
 ## 解决方案
  ### 数据集特点
