@@ -43,7 +43,7 @@
  
  ## 代码运行说明
    ### 编译
-   这个代码是基于mmdetection框架，代码所需的依赖位于/code/目录下的requirements.txt文件中，mmdet文件夹中是运行代码所需要的工具包，在依赖安装完成之后，需要执行编译，首先通过命令python setup.py develop 执行/code/目录下的setup.py文件，使程序进行编译。
+   这个代码是基于mmdetection框架，代码所需的依赖位于/code/目录下的requirements.txt文件中，mmdet文件夹中是运行代码所需要的工具包，在依赖安装完成之后，需要执行编译，首先通过命令python setup.py develop 执行/code/目录下的编译文件setup.py，使程序进行编译。
  
   ### 程序入口
    所提交的代码project文件夹下面/code/目录下的main.py为主程序，执行python3 main.py即可产生预测结果，将在prediction_result目录下生成预测结果文件predictions.json，预测代码main.py根据/code/目录下的MyConfig.py文件和/usr_data/目录下的model.pth模型文件的内容共同产生预测结果predictions.json。
