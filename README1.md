@@ -1,11 +1,11 @@
 ## 使用的环境以及依赖的环境
-   ### ubuntu16.04 TSL系统
-   ### python3.6或python3.7
-   ### pytorch 1.3 torchvision 0.4
-   ### mmdetection框架
-   ### cuda 10.1
-   ### gcc >= 4.9
-   ### nccl 2
+    ubuntu16.04 TSL系统  
+    python3.6或python3.7  
+    pytorch 1.3 torchvision 0.4  
+    mmdetection框架  
+    cuda 10.1  
+    gcc >= 4.9  
+    nccl 2  
    
 
 ## 程序入口
