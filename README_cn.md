@@ -1,5 +1,4 @@
- 中文|[英文](README.md)
- ## models仓简介
+ ## 解决方案
  model仓提供ascenddk sample中使用的网络模型，此网络模型是基于主流的开源深度学习网络转换后的Davici模型。
  
  ## 模型转化指导
